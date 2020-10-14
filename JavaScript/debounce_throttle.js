@@ -40,6 +40,7 @@ var returnedFunction = debounce(function() {
 window.addEventListener('resize', returnedFunction);
 
 // https://levelup.gitconnected.com/throttle-in-javascript-improve-your-applications-performance-984a4e020a3f
+// https://codepen.io/treyhuffine/pen/mdyBEvM?editors=0110
 
 // Pass in the callback that we want to throttle and the delay between throttled events
 const throttle = (callback, delay) => {
