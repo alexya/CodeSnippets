@@ -95,8 +95,8 @@ function throttle(fn) {
          canRun = true;
        }, 500);
      };
-   }
-   function sayHi(e) {
-     console.log(e.target.innerWidth, e.target.innerHeight);
-   }
-   window.addEventListener('resize', throttle(sayHi));
+}
+function sayHi(e) {
+ console.log(e.target.innerWidth, e.target.innerHeight);
+}
+window.addEventListener('resize', throttle(sayHi));
