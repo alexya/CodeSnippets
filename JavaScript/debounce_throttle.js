@@ -1,4 +1,5 @@
 // https://levelup.gitconnected.com/debounce-in-javascript-improve-your-applications-performance-5b01855e086
+
 // Originally inspired by  David Walsh (https://davidwalsh.name/javascript-debounce-function)
 
 // Returns a function, that, as long as it continues to be invoked, will not
@@ -31,6 +32,68 @@ const debounce = (func, wait) => {
     timeout = setTimeout(later, wait);
   };
 };
+
+var returnedFunction = debounce(function() {
+  // All the taxing stuff you do
+}, 250);
+
+window.addEventListener('resize', returnedFunction);
+
+// https://levelup.gitconnected.com/throttle-in-javascript-improve-your-applications-performance-984a4e020a3f
+
+// Pass in the callback that we want to throttle and the delay between throttled events
+const throttle = (callback, delay) => {
+  // Create a closure around these variables.
+  // They will be shared among all events handled by the throttle.
+  let throttleTimeout = null;
+  let storedEvent = null;
+
+  // This is the function that will handle events and throttle callbacks when the throttle is active.
+  const throttledEventHandler = event => {
+    // Update the stored event every iteration
+    storedEvent = event;
+
+    // We execute the callback with our event if our throttle is not active
+    const shouldHandleEvent = !throttleTimeout;
+
+    // If there isn't a throttle active, we execute the callback and create a new throttle.
+    if (shouldHandleEvent) {
+      // Handle our event
+      callback(storedEvent);
+
+      // Since we have used our stored event, we null it out.
+      storedEvent = null;
+
+      // Create a new throttle by setting a timeout to prevent handling events during the delay.
+      // Once the timeout finishes, we execute our throttle if we have a stored event.
+      throttleTimeout = setTimeout(() => {
+        // We immediately null out the throttleTimeout since the throttle time has expired.
+        throttleTimeout = null;
+
+        // If we have a stored event, recursively call this function.
+        // The recursion is what allows us to run continusously while events are present.
+        // If events stop coming in, our throttle will end. It will then execute immediately if a new event ever comes.
+        if (storedEvent) {
+          // Since our timeout finishes:
+          // 1. This recursive call will execute `callback` immediately since throttleTimeout is now null
+          // 2. It will restart the throttle timer, allowing us to repeat the throttle process
+          throttledEventHandler(storedEvent);
+        }
+      }, delay);
+    }
+  };
+
+  // Return our throttled event handler as a closure
+  return throttledEventHandler;
+};
+
+var returnedFunction = throttle(function() {
+  // Do all the taxing stuff and API requests
+}, 500);
+
+window.addEventListener('scroll', returnedFunction);
+
+// //////////////////////////////////////////////////////////
 
 // https://blog.csdn.net/qq_29557739/article/details/96430431
 // 这个是用来获取当前时间戳的
