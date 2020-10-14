@@ -164,3 +164,7 @@ function sayHi(e) {
  console.log(e.target.innerWidth, e.target.innerHeight);
 }
 window.addEventListener('resize', throttle(sayHi));
+
+// And more explain and samples
+// with good code samples and presentation:
+// https://css-tricks.com/debouncing-throttling-explained-examples/
