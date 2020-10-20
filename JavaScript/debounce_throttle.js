@@ -1,3 +1,5 @@
+// 下面所有的代码，并未经过验证，只是提供思路和参考
+
 // https://levelup.gitconnected.com/debounce-in-javascript-improve-your-applications-performance-5b01855e086
 
 // Originally inspired by  David Walsh (https://davidwalsh.name/javascript-debounce-function)
